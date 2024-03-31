@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class BaseAppbar extends StatelessWidget implements PreferredSizeWidget {
+class BaseAppbarWidget extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
