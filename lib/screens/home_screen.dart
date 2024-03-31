@@ -99,8 +99,10 @@ class HomeScreen extends StatelessWidget {
                         transitionBuilder:
                             (context, animation1, animation2, child) {
                           return ScaleTransition(
-                            scale: Tween<double>(begin: 0, end: 1)
-                                .animate(animation1),
+                            scale: Tween<double>(
+                              begin: 0,
+                              end: 1,
+                            ).animate(animation1),
                             child: skipDialog(
                               nextRoundButton: nextRoundAcceptedButton(),
                               context: context,
