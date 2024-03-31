@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:number_game/screens/home.dart';
 
 void main() {
   runApp(GuessNumberApp());
@@ -10,7 +11,7 @@ class GuessNumberApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: null,
+      home: HomeScreen(),
     );
   }
 }
