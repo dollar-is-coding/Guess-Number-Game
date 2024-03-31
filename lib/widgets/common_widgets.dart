@@ -223,3 +223,32 @@ Widget skipDialog({
     ),
   );
 }
+
+Widget analyseSign({@required text, @required color, @required context}) {
+  return Row(
+    children: [
+      Padding(
+        padding: const EdgeInsets.only(right: 6),
+        child: Text(
+          text,
+          style: Theme.of(context)
+              .textTheme
+              .labelSmall!
+              .copyWith(color: Colors.black54),
+        ),
+      ),
+      Container(
+        width: 52,
+        height: 16,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(4),
+          color: color,
+          border: Border.all(
+            width: .8,
+            color: Colors.white60,
+          ),
+        ),
+      )
+    ],
+  );
+}

@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:number_game/controllers/number_controller.dart';
+import 'package:number_game/controllers/result_controller.dart';
 import 'package:number_game/widgets/common_widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   final numberController = NumberController.to;
+  final resultController = ResultController.to;
   @override
   Widget build(BuildContext context) {
     var briefNumbers = numberController.numbers;
+    var briefResults = resultController.results;
 
     Widget newRoundButton() {
       return ElevatedButton(
@@ -49,6 +52,7 @@ class HomeScreen extends StatelessWidget {
         ),
         onPressed: () {
           numberController.resetNumbers();
+          resultController.updateScore(0);
           Get.back(result: true);
         },
         child: Text(
@@ -59,6 +63,205 @@ class HomeScreen extends StatelessWidget {
         ),
       );
     }
+
+    Widget analyseChart = Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('asset/image/bg.jpg'),
+          fit: BoxFit.cover,
+        ),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(28),
+          topRight: Radius.circular(28),
+        ),
+      ),
+      child: Column(
+        children: [
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Text(
+                'Analysis',
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      fontWeight: FontWeight.w500,
+                    ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      width: .8,
+                      color: Colors.grey.withOpacity(.4),
+                    ),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(6, 3, 6, 3),
+                      child: IconButton(
+                        onPressed: () {
+                          Get.back(result: true);
+                        },
+                        icon: Icon(Icons.close_outlined),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Obx(
+            () {
+              return resultController.maxScore != 0
+                  ? Padding(
+                      padding: const EdgeInsets.only(top: 10, bottom: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          analyseSign(
+                            text: 'Win',
+                            color: Color.fromARGB(255, 229, 244, 177),
+                            context: context,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                            child: analyseSign(
+                              text: 'Lose',
+                              color: Color.fromARGB(255, 232, 195, 127),
+                              context: context,
+                            ),
+                          ),
+                          analyseSign(
+                            text: 'Skip',
+                            color: Colors.white30,
+                            context: context,
+                          ),
+                        ],
+                      ),
+                    )
+                  : Container();
+            },
+          ),
+          Obx(
+            () {
+              return resultController.maxScore == 0
+                  ? Expanded(
+                      child: Center(
+                        child: Text(
+                          'There\'s no data!',
+                          style:
+                              Theme.of(context).textTheme.labelSmall!.copyWith(
+                                    color: Colors.black38,
+                                  ),
+                        ),
+                      ),
+                    )
+                  : Expanded(
+                      child: ListView(
+                        physics: BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        controller: resultController.scrollController,
+                        children: List.generate(
+                          resultController.resultLength.value,
+                          (index) {
+                            print('screen listview: ${briefResults.length}');
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Flexible(
+                                  child: FractionallySizedBox(
+                                    child: Container(
+                                      padding:
+                                          EdgeInsets.fromLTRB(12, 8, 12, 8),
+                                      margin: EdgeInsets.only(bottom: 6),
+                                      decoration: BoxDecoration(
+                                        border: Border(
+                                          bottom: BorderSide(
+                                            width: 1,
+                                            color: Colors.white30,
+                                          ),
+                                        ),
+                                      ),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          singleColumnChart(
+                                            message: briefResults[index]
+                                                .win
+                                                .toString(),
+                                            heightSize: (MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    .3) *
+                                                briefResults[index].win /
+                                                resultController.maxScore.value,
+                                            color: Color.fromARGB(
+                                                255, 229, 244, 177),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 4,
+                                              right: 4,
+                                            ),
+                                            child: singleColumnChart(
+                                              message: briefResults[index]
+                                                  .lose
+                                                  .toString(),
+                                              heightSize:
+                                                  (MediaQuery.of(context)
+                                                              .size
+                                                              .height *
+                                                          .3) *
+                                                      briefResults[index].lose /
+                                                      resultController
+                                                          .maxScore.value,
+                                              color: Color.fromARGB(
+                                                  255, 232, 195, 127),
+                                            ),
+                                          ),
+                                          singleColumnChart(
+                                            message: briefResults[index]
+                                                .pass
+                                                .toString(),
+                                            heightSize: (MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    .3) *
+                                                briefResults[index].pass /
+                                                resultController.maxScore.value,
+                                            color: Colors.white30,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 12),
+                                  child: Text(
+                                    briefResults[index].date.substring(8, 10) +
+                                        '.' +
+                                        briefResults[index]
+                                            .date
+                                            .substring(5, 7),
+                                    style:
+                                        Theme.of(context).textTheme.labelMedium,
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                      ),
+                    );
+            },
+          )
+        ],
+      ),
+    );
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -81,7 +284,16 @@ class HomeScreen extends StatelessWidget {
             Row(
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    resultController.scrollToLast();
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        Get.put(ResultController());
+                        return analyseChart;
+                      },
+                    );
+                  },
                   icon: Icon(Icons.equalizer_outlined),
                 ),
                 IconButton(
@@ -221,7 +433,7 @@ class HomeScreen extends StatelessWidget {
                       numberController.updateNumber(value);
                       if (numberController.rightNumber == 4 &&
                           numberController.rightPosition == 4) {
-                        // resultController.updateScore(1);
+                        resultController.updateScore(1);
                         numberController.tempNumber =
                             briefNumbers[0].correctNumber;
                         showGeneralDialog(
@@ -248,6 +460,7 @@ class HomeScreen extends StatelessWidget {
                           },
                         );
                       } else if (briefNumbers[9].isShow == 1) {
+                        resultController.updateScore(2);
                         numberController.tempNumber =
                             briefNumbers[0].correctNumber;
                         showGeneralDialog(

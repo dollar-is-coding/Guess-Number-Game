@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:number_game/models/result_model.dart';
@@ -16,7 +15,6 @@ class ResultController extends GetxController {
   onInit() {
     super.onInit();
     initDateData();
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   }
 
   scrollToLast() {
