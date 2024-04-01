@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 DataColumn headerTitle({
@@ -59,10 +57,19 @@ Widget singleColumnChart({
   @required message,
   @required heightSize,
   @required color,
+  @required context,
 }) {
   return Tooltip(
     message: message,
+    verticalOffset: heightSize - (heightSize * .44),
     triggerMode: TooltipTriggerMode.tap,
+    textStyle: Theme.of(context).textTheme.labelMedium!.copyWith(
+          color: Colors.blueGrey.withOpacity(.9),
+        ),
+    decoration: BoxDecoration(
+      color: Colors.white60,
+      borderRadius: BorderRadius.circular(4),
+    ),
     child: Container(
       height: heightSize,
       width: 32,
@@ -109,7 +116,7 @@ Widget resultDialog({
                 Text(
                   result,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      fontWeight: FontWeight.bold, color: Colors.black),
+                      fontWeight: FontWeight.bold, color: Colors.white),
                   textAlign: TextAlign.center,
                 ),
                 Text(
@@ -117,7 +124,7 @@ Widget resultDialog({
                   style: Theme.of(context)
                       .textTheme
                       .headlineSmall!
-                      .copyWith(color: Colors.black),
+                      .copyWith(color: Colors.white),
                   textAlign: TextAlign.center,
                 ),
                 Padding(
@@ -171,7 +178,7 @@ Widget skipDialog({
                 Text(
                   'Start a new round?',
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        color: Color.fromARGB(255, 30, 42, 92),
+                        color: Colors.white,
                       ),
                   textAlign: TextAlign.center,
                 ),
@@ -234,7 +241,7 @@ Widget analyseSign({@required text, @required color, @required context}) {
           style: Theme.of(context)
               .textTheme
               .labelSmall!
-              .copyWith(color: Colors.black54),
+              .copyWith(color: Colors.white.withOpacity(.9)),
         ),
       ),
       Container(

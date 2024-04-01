@@ -14,6 +14,7 @@ class NumberController extends GetxController {
   int rightPosition = 0;
   var inputNumber = TextEditingController();
   String tempNumber = '';
+  var isValid = false.obs;
 
   @override
   void onInit() {
@@ -120,5 +121,9 @@ class NumberController extends GetxController {
     }
     numbers.refresh();
     rightNumber = rightPosition = currentPosition = 0;
+  }
+
+  acceptNewNumber(var value) {
+    isValid.value = value;
   }
 }
