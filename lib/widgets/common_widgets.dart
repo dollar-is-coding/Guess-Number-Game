@@ -12,7 +12,7 @@ DataColumn headerTitle({
         softWrap: true,
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.labelSmall!.copyWith(
-              color: Colors.black38,
+              color: Colors.black54,
             ),
       ),
     ),
@@ -64,10 +64,10 @@ Widget singleColumnChart({
     verticalOffset: heightSize - (heightSize * .44),
     triggerMode: TooltipTriggerMode.tap,
     textStyle: Theme.of(context).textTheme.labelMedium!.copyWith(
-          color: Colors.blueGrey.withOpacity(.9),
+          color: Colors.black45,
         ),
     decoration: BoxDecoration(
-      color: Colors.white60,
+      color: Colors.white70,
       borderRadius: BorderRadius.circular(4),
     ),
     child: Container(
@@ -105,7 +105,7 @@ Widget resultDialog({
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(28),
             image: DecorationImage(
-              image: AssetImage('asset/image/bg.jpg'),
+              image: AssetImage('asset/image/bg2.jpg'),
               fit: BoxFit.cover,
             ),
           ),
@@ -115,16 +115,15 @@ Widget resultDialog({
               children: [
                 Text(
                   result,
-                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      fontWeight: FontWeight.bold, color: Colors.white),
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleMedium!
+                      .copyWith(fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
                 Text(
                   correctNumber,
-                  style: Theme.of(context)
-                      .textTheme
-                      .headlineSmall!
-                      .copyWith(color: Colors.white),
+                  style: Theme.of(context).textTheme.headlineSmall,
                   textAlign: TextAlign.center,
                 ),
                 Padding(
@@ -166,7 +165,7 @@ Widget skipDialog({
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(28),
             image: DecorationImage(
-              image: AssetImage('asset/image/bg.jpg'),
+              image: AssetImage('asset/image/bg2.jpg'),
               fit: BoxFit.cover,
             ),
           ),
@@ -178,7 +177,7 @@ Widget skipDialog({
                 Text(
                   'Start a new round?',
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        color: Colors.white,
+                        color: Colors.black87,
                       ),
                   textAlign: TextAlign.center,
                 ),

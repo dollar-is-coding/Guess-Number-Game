@@ -299,11 +299,12 @@ class HomeScreen extends StatelessWidget {
                 Tooltip(
                   message: 'Analyse chart',
                   triggerMode: TooltipTriggerMode.longPress,
-                  textStyle: Theme.of(context).textTheme.labelMedium!.copyWith(
-                        color: Colors.blueGrey.withOpacity(.9),
-                      ),
+                  textStyle: Theme.of(context)
+                      .textTheme
+                      .labelMedium!
+                      .copyWith(color: Colors.black45),
                   decoration: BoxDecoration(
-                    color: Colors.white60,
+                    color: Colors.white70,
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: IconButton(
@@ -323,11 +324,12 @@ class HomeScreen extends StatelessWidget {
                 Tooltip(
                   message: 'Skip round',
                   triggerMode: TooltipTriggerMode.longPress,
-                  textStyle: Theme.of(context).textTheme.labelMedium!.copyWith(
-                        color: Colors.blueGrey.withOpacity(.9),
-                      ),
+                  textStyle: Theme.of(context)
+                      .textTheme
+                      .labelMedium!
+                      .copyWith(color: Colors.black45),
                   decoration: BoxDecoration(
-                    color: Colors.white60,
+                    color: Colors.white70,
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: IconButton(
@@ -384,7 +386,7 @@ class HomeScreen extends StatelessWidget {
                 margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  color: Colors.white30,
+                  color: Colors.white54,
                 ),
                 child: DataTable(
                   columns: [
@@ -449,7 +451,7 @@ class HomeScreen extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: Colors.white54,
+                    fillColor: Colors.white70,
                     hintText: 'Type your guess here...',
                     hintStyle: Theme.of(context)
                         .textTheme
@@ -472,12 +474,12 @@ class HomeScreen extends StatelessWidget {
                           ? Icon(
                               Icons.check_circle_rounded,
                               color: Color.fromARGB(255, 116, 144, 69)
-                                  .withOpacity(.7),
+                                  .withOpacity(.8),
                             )
                           : Icon(
                               Icons.cancel_rounded,
                               color: Color.fromARGB(255, 209, 42, 30)
-                                  .withOpacity(.7),
+                                  .withOpacity(.8),
                             ),
                     ),
                   ),
