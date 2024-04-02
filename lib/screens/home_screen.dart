@@ -83,7 +83,7 @@ class HomeScreen extends StatelessWidget {
             alignment: Alignment.center,
             children: [
               Text(
-                'Analysis',
+                'Analyse chart',
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       fontWeight: FontWeight.w500,
                       color: Colors.white,
@@ -297,31 +297,6 @@ class HomeScreen extends StatelessWidget {
             Row(
               children: [
                 Tooltip(
-                  message: 'Analyse chart',
-                  triggerMode: TooltipTriggerMode.longPress,
-                  textStyle: Theme.of(context)
-                      .textTheme
-                      .labelMedium!
-                      .copyWith(color: Colors.black45),
-                  decoration: BoxDecoration(
-                    color: Colors.white70,
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  child: IconButton(
-                    onPressed: () {
-                      resultController.scrollToLast();
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (context) {
-                          Get.put(ResultController());
-                          return analyseChart;
-                        },
-                      );
-                    },
-                    icon: Icon(Icons.equalizer_outlined),
-                  ),
-                ),
-                Tooltip(
                   message: 'Skip round',
                   triggerMode: TooltipTriggerMode.longPress,
                   textStyle: Theme.of(context)
@@ -364,6 +339,47 @@ class HomeScreen extends StatelessWidget {
                       Icons.refresh_rounded,
                       color: Colors.black,
                     ),
+                  ),
+                ),
+                Tooltip(
+                  message: 'Analyse chart',
+                  triggerMode: TooltipTriggerMode.longPress,
+                  textStyle: Theme.of(context)
+                      .textTheme
+                      .labelMedium!
+                      .copyWith(color: Colors.black45),
+                  decoration: BoxDecoration(
+                    color: Colors.white70,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: IconButton(
+                    onPressed: () {
+                      resultController.scrollToLast();
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          Get.put(ResultController());
+                          return analyseChart;
+                        },
+                      );
+                    },
+                    icon: Icon(Icons.equalizer_outlined),
+                  ),
+                ),
+                Tooltip(
+                  message: 'Theme',
+                  triggerMode: TooltipTriggerMode.longPress,
+                  textStyle: Theme.of(context)
+                      .textTheme
+                      .labelMedium!
+                      .copyWith(color: Colors.black45),
+                  decoration: BoxDecoration(
+                    color: Colors.white70,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.light_mode_rounded),
                   ),
                 ),
               ],

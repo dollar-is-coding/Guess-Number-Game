@@ -15,6 +15,7 @@ class ResultController extends GetxController {
   onInit() {
     super.onInit();
     initDateData();
+    print('Init');
   }
 
   scrollToLast() {
@@ -132,22 +133,40 @@ class ResultController extends GetxController {
 
   // 1: win, 2: lose, 0:pass
   updateScore(int result) async {
-    var latestDate = await ResultDB.getNow();
-    int win = latestDate![0].win,
-        lose = latestDate[0].lose,
-        pass = latestDate[0].pass;
+    var latestResponse = await ResultDB.getLatestDate();
+    DateTime dateNow = DateTime(
+      DateTime.now().year,
+      DateTime.now().month,
+      DateTime.now().day,
+    );
+    DateTime latestDate = DateTime(
+      int.parse(latestResponse![0].date.substring(0, 4)),
+      int.parse(latestResponse[0].date.substring(5, 7)),
+      int.parse(latestResponse[0].date.substring(8, 10)),
+    );
+    print('latest date: ' + latestDate.toString());
+    if (latestDate.isBefore(dateNow)) {
+      checkLongTimeNoPlay(latestDate, dateNow);
+      print('new date already come!');
+      var newResponse = await ResultDB.getFiveLatestDate();
+      results.assignAll(newResponse);
+    }
+
+    // Old
+    var now = await ResultDB.getNow();
+    int win = now![0].win, lose = now[0].lose, pass = now[0].pass;
     ResultDB.updateDate(
       ResultModel(
-        id: latestDate[0].id,
-        date: latestDate[0].date,
+        id: now[0].id,
+        date: now[0].date,
         win: result == 1 ? win + 1 : win,
         lose: result == 2 ? lose + 1 : lose,
         pass: result == 0 ? pass + 1 : pass,
       ),
     );
-    results[latestDate[0].id! - 1] = ResultModel(
-      id: latestDate[0].id,
-      date: latestDate[0].date,
+    results[4] = ResultModel(
+      id: now[0].id,
+      date: now[0].date,
       win: result == 1 ? win + 1 : win,
       lose: result == 2 ? lose + 1 : lose,
       pass: result == 0 ? pass + 1 : pass,

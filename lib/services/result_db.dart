@@ -17,17 +17,10 @@ class ResultDB {
 
   static Future<List<ResultModel>?> getNow() async {
     final db = await DatabaseHelper.getDB();
-    ResultModel now = ResultModel(
-      id: 1,
-      date: DateFormat('yyyy-MM-dd').format(DateTime.now()),
-      win: 0,
-      lose: 0,
-      pass: 0,
-    );
     final List<Map<String, dynamic>> maps = await db.query(
       'Result',
       where: 'date = ?',
-      whereArgs: [now.date],
+      whereArgs: [DateFormat('yyyy-MM-dd').format(DateTime.now())],
     );
     if (maps.isEmpty) return [];
     return List.generate(
