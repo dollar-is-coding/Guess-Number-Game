@@ -72,9 +72,10 @@ flutter:
   assets:
     - asset/image/light_bg.jpg
     - asset/image/dark_bg.jpg
-    - asset/image/bg.jpg
     - asset/image/bg2.jpg
     - asset/image/bg3.jpg
+    - asset/image/dark.jpg
+    - asset/image/dark3.jpg
     - asset/image/reset.gif
     - asset/image/win.gif
     - asset/image/lose.gif

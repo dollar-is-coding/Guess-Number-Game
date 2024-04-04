@@ -1,6 +1,6 @@
 class ThemeModel {
   int? id;
-  bool isLight;
+  int isLight;
 
   ThemeModel({
     this.id,

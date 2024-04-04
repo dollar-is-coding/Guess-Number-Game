@@ -150,6 +150,7 @@ class ResultController extends GetxController {
       print('new date already come!');
       var newResponse = await ResultDB.getFiveLatestDate();
       results.assignAll(newResponse);
+      results.refresh();
     }
 
     // Old

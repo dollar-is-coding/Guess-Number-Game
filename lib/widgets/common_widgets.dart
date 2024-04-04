@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 DataColumn headerTitle({
   @required text,
+  @required color,
   @required context,
 }) {
   return DataColumn(
@@ -11,9 +12,7 @@ DataColumn headerTitle({
         text,
         softWrap: true,
         textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.labelSmall!.copyWith(
-              color: Colors.black54,
-            ),
+        style: Theme.of(context).textTheme.labelSmall!.copyWith(color: color),
       ),
     ),
   );
@@ -53,12 +52,12 @@ Widget dateFormated({@required result, @required context}) {
   );
 }
 
-Widget singleColumnChart({
-  @required message,
-  @required heightSize,
-  @required color,
-  @required context,
-}) {
+Widget singleColumnChart(
+    {@required message,
+    @required heightSize,
+    @required color,
+    @required context,
+    @required borderColor}) {
   return Tooltip(
     message: message,
     verticalOffset: heightSize - (heightSize * .44),
@@ -81,7 +80,7 @@ Widget singleColumnChart({
         ),
         border: Border.all(
           width: .8,
-          color: Colors.white60,
+          color: borderColor,
         ),
       ),
     ),
@@ -94,6 +93,8 @@ Widget resultDialog({
   @required context,
   @required correctNumber,
   @required nextRoundButton,
+  @required color,
+  @required background,
 }) {
   return AlertDialog(
     contentPadding: EdgeInsets.all(0),
@@ -105,7 +106,7 @@ Widget resultDialog({
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(28),
             image: DecorationImage(
-              image: AssetImage('asset/image/bg2.jpg'),
+              image: AssetImage(background),
               fit: BoxFit.cover,
             ),
           ),
@@ -115,15 +116,18 @@ Widget resultDialog({
               children: [
                 Text(
                   result,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleMedium!
-                      .copyWith(fontWeight: FontWeight.bold),
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: color,
+                      ),
                   textAlign: TextAlign.center,
                 ),
                 Text(
                   correctNumber,
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineSmall!
+                      .copyWith(color: color),
                   textAlign: TextAlign.center,
                 ),
                 Padding(
@@ -150,10 +154,11 @@ Widget resultDialog({
   );
 }
 
-Widget skipDialog({
-  @required nextRoundButton,
-  @required context,
-}) {
+Widget skipDialog(
+    {@required nextRoundButton,
+    @required context,
+    @required color,
+    @required background}) {
   return AlertDialog(
     contentPadding: const EdgeInsets.all(0),
     backgroundColor: Colors.transparent,
@@ -165,7 +170,7 @@ Widget skipDialog({
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(28),
             image: DecorationImage(
-              image: AssetImage('asset/image/bg2.jpg'),
+              image: AssetImage(background),
               fit: BoxFit.cover,
             ),
           ),
@@ -176,9 +181,10 @@ Widget skipDialog({
               children: [
                 Text(
                   'Start a new round?',
-                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        color: Colors.black87,
-                      ),
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge!
+                      .copyWith(color: color),
                   textAlign: TextAlign.center,
                 ),
                 Padding(
@@ -230,7 +236,12 @@ Widget skipDialog({
   );
 }
 
-Widget analyseSign({@required text, @required color, @required context}) {
+Widget analyseSign(
+    {@required text,
+    @required color,
+    @required context,
+    @required colorText,
+    @required borderColor}) {
   return Row(
     children: [
       Padding(
@@ -240,7 +251,7 @@ Widget analyseSign({@required text, @required color, @required context}) {
           style: Theme.of(context)
               .textTheme
               .labelSmall!
-              .copyWith(color: Colors.white.withOpacity(.9)),
+              .copyWith(color: colorText),
         ),
       ),
       Container(
@@ -251,7 +262,7 @@ Widget analyseSign({@required text, @required color, @required context}) {
           color: color,
           border: Border.all(
             width: .8,
-            color: Colors.white60,
+            color: borderColor,
           ),
         ),
       )
