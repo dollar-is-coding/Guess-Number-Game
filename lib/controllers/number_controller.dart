@@ -14,7 +14,7 @@ class NumberController extends GetxController {
   int rightPosition = 0;
   var inputNumber = TextEditingController();
   String tempNumber = '';
-  var isValid = false.obs;
+  var isValid = 0.obs;
 
   @override
   void onInit() {
@@ -125,5 +125,28 @@ class NumberController extends GetxController {
 
   acceptNewNumber(var value) {
     isValid.value = value;
+  }
+
+  rejectSameCharacter() {
+    var tempText = inputNumber.text;
+    bool sameCharacter = false;
+    if (inputNumber.text.length > 1) {
+      for (var i = 0; i < inputNumber.text.length - 1; i++) {
+        if (tempText[i] == tempText[tempText.length - 1]) {
+          inputNumber.text = tempText.substring(0, tempText.length - 1);
+          inputNumber.selection = TextSelection.fromPosition(
+            TextPosition(offset: inputNumber.text.length),
+          );
+          acceptNewNumber(2);
+          sameCharacter = !sameCharacter;
+        }
+      }
+    }
+    if (!sameCharacter) {
+      if (inputNumber.text.length == 4)
+        acceptNewNumber(1);
+      else
+        acceptNewNumber(0);
+    }
   }
 }

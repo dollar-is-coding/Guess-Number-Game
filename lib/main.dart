@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:number_game/controllers/number_controller.dart';
 import 'package:number_game/controllers/theme_controller.dart';
-import 'package:number_game/screens/home_screen.dart';
+import 'package:number_game/screens/splash_screen.dart';
 
 void main() {
   Get.put(NumberController());
@@ -15,7 +15,7 @@ class GuessNumberApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: SplashScreen(),
     );
   }
 }

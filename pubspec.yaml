@@ -79,6 +79,8 @@ flutter:
     - asset/image/reset.gif
     - asset/image/win.gif
     - asset/image/lose.gif
+    - asset/logo/avatar.png
+    - asset/logo/splash.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

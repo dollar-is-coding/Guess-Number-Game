@@ -14,6 +14,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var briefNumbers = numberController.numbers;
     var briefResults = resultController.results;
+    var heightScreen = MediaQuery.of(context).size.height;
 
     Widget newRoundButton() {
       return ElevatedButton(
@@ -235,14 +236,13 @@ class HomeScreen extends StatelessWidget {
                                                     .win
                                                     .toString(),
                                                 heightSize:
-                                                    (MediaQuery.of(context)
-                                                                .size
-                                                                .height *
-                                                            .3) *
-                                                        briefResults[index]
-                                                            .win /
-                                                        resultController
-                                                            .maxScore.value,
+                                                    briefResults[index].win == 0
+                                                        ? 2.0
+                                                        : (heightScreen * .3) *
+                                                            briefResults[index]
+                                                                .win /
+                                                            resultController
+                                                                .maxScore.value,
                                                 color: Color.fromARGB(
                                                     255, 229, 244, 177),
                                                 context: context,
@@ -260,11 +260,12 @@ class HomeScreen extends StatelessWidget {
                                                   message: briefResults[index]
                                                       .lose
                                                       .toString(),
-                                                  heightSize:
-                                                      (MediaQuery.of(context)
-                                                                  .size
-                                                                  .height *
-                                                              .3) *
+                                                  heightSize: briefResults[
+                                                                  index]
+                                                              .lose ==
+                                                          0
+                                                      ? 2.0
+                                                      : (heightScreen * .3) *
                                                           briefResults[index]
                                                               .lose /
                                                           resultController
@@ -283,14 +284,14 @@ class HomeScreen extends StatelessWidget {
                                                     .pass
                                                     .toString(),
                                                 heightSize:
-                                                    (MediaQuery.of(context)
-                                                                .size
-                                                                .height *
-                                                            .3) *
-                                                        briefResults[index]
-                                                            .pass /
-                                                        resultController
-                                                            .maxScore.value,
+                                                    briefResults[index].pass ==
+                                                            0
+                                                        ? 2.0
+                                                        : (heightScreen * .3) *
+                                                            briefResults[index]
+                                                                .pass /
+                                                            resultController
+                                                                .maxScore.value,
                                                 color: Colors.white60,
                                                 context: context,
                                                 borderColor:
@@ -633,24 +634,27 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                           suffixIcon: Obx(
-                            () => numberController.isValid.value
+                            () => numberController.isValid.value == 1
                                 ? Icon(
                                     Icons.check_circle_rounded,
                                     color: Color.fromARGB(255, 116, 144, 69)
                                         .withOpacity(.8),
                                   )
-                                : Icon(
-                                    Icons.cancel_rounded,
-                                    color: Color.fromARGB(255, 209, 42, 30)
-                                        .withOpacity(.8),
-                                  ),
+                                : numberController.isValid.value == 0
+                                    ? Icon(
+                                        Icons.cancel_rounded,
+                                        color: Color.fromARGB(255, 209, 42, 30)
+                                            .withOpacity(.8),
+                                      )
+                                    : Icon(
+                                        Icons.do_not_disturb_on_rounded,
+                                        color: Color.fromARGB(255, 255, 226, 35)
+                                            .withOpacity(.8),
+                                      ),
                           ),
                         ),
                         onChanged: (value) {
-                          if (value.length == 4)
-                            numberController.acceptNewNumber(true);
-                          else
-                            numberController.acceptNewNumber(false);
+                          numberController.rejectSameCharacter();
                         },
                         onSubmitted: (value) {
                           if (value.length == 4) {
