@@ -194,7 +194,9 @@ class HomeScreen extends StatelessWidget {
                                   .textTheme
                                   .labelSmall!
                                   .copyWith(
-                                    color: Colors.white60,
+                                    color: themeController.theme.value
+                                        ? Colors.black38
+                                        : Colors.white60,
                                   ),
                             ),
                           ),
@@ -576,7 +578,8 @@ class HomeScreen extends StatelessWidget {
                                       : Colors.transparent,
                                 ),
                                 bodyCell(
-                                  text: '${briefNumbers[index].rightPosition}',
+                                  text:
+                                      '${briefNumbers[index].rightPosition} ${briefNumbers[index].correctNumber}',
                                   context: context,
                                   fontweight: FontWeight.normal,
                                   color: briefNumbers[index].isShow == 1
@@ -658,7 +661,7 @@ class HomeScreen extends StatelessWidget {
                         },
                         onSubmitted: (value) {
                           if (value.length == 4) {
-                            numberController.acceptNewNumber(false);
+                            numberController.acceptNewNumber(0);
                             numberController.updateNumber(value);
                             if (numberController.rightNumber == 4 &&
                                 numberController.rightPosition == 4) {
