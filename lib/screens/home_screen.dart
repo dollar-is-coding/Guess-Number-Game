@@ -578,8 +578,7 @@ class HomeScreen extends StatelessWidget {
                                       : Colors.transparent,
                                 ),
                                 bodyCell(
-                                  text:
-                                      '${briefNumbers[index].rightPosition} ${briefNumbers[index].correctNumber}',
+                                  text: '${briefNumbers[index].rightPosition}',
                                   context: context,
                                   fontweight: FontWeight.normal,
                                   color: briefNumbers[index].isShow == 1
@@ -597,6 +596,7 @@ class HomeScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(16, 12, 16, 20),
                       child: TextField(
+                        enableInteractiveSelection: false,
                         textAlign: TextAlign.center,
                         controller: numberController.inputNumber,
                         maxLength: 4,
